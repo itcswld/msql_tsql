@@ -1,0 +1,6 @@
+USE edusys 
+GO
+ALTER SEQUENCE seqName
+   RESTART WITH 50
+   INCREMENT BY 2
+GO
