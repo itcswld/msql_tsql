@@ -1,3 +1,3 @@
 USE master
 GO
-CREATE DATABASE ¹Ï®Ñ
+CREATE DATABASE dbName

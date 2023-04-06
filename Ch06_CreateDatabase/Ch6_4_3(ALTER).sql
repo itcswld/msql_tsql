@@ -1,11 +1,11 @@
 USE master
 GO
-ALTER DATABASE ���~ ADD FILE
-(  NAME = '���~_�s��_13',
-   FILENAME = 'D:\Data\���~_�s��_13.ndf',
+ALTER DATABASE dbName ADD FILE
+(  NAME = 'dbName_group_13',
+   FILENAME = 'D:\Data\dbName_group_13.ndf',
    SIZE = 2MB,
    MAXSIZE=10MB,
-   FILEGROWTH=1MB ) TO FILEGROUP ���~_�s��
+   FILEGROWTH=1MB ) TO FILEGROUP dbName_groups
 
 /*語法
 ALTER DATABASE databaseName

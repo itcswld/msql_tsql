@@ -1,17 +1,17 @@
 USE master
 GO
-CREATE DATABASE �Ǯ�
+CREATE DATABASE dbName
 ON PRIMARY
 --//（主）資料檔規格清單
-  ( NAME='�Ǯ�',
-    FILENAME= 'D:\Data\�Ǯ�.mdf', -- //mdf : master data file
+  ( NAME='dbName',
+    FILENAME= 'D:\Data\dbName.mdf', -- //mdf : master data file
     SIZE=8MB,
     MAXSIZE=10MB,
     FILEGROWTH=1MB )
 LOG ON
 --//交易記錄檔規格清單
-  ( NAME='�Ǯ�_log',
-    FILENAME = 'D:\Data\�Ǯ�_log.ldf', --ldf: log data file
+  ( NAME='dbName_log',
+    FILENAME = 'D:\Data\dbName_log.ldf', --ldf: log data file
     SIZE=1MB,
     MAXSIZE=10MB,
     FILEGROWTH=10% )

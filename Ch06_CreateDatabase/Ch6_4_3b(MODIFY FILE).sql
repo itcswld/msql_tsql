@@ -1,7 +1,7 @@
 USE master
 GO
---調整
-ALTER DATABASE �N�z���~ MODIFY FILE
- ( NAME = '�N�z���~_log', SIZE = 5MB )
+--調整size
+ALTER DATABASE dbName MODIFY FILE
+ ( NAME = 'dbName_log', SIZE = 5MB )
 
 

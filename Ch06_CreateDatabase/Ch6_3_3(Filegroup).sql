@@ -5,30 +5,30 @@
 --example 1
 USE master
 GO
-CREATE DATABASE LC~
+CREATE DATABASE dbName
 --1. Primary Filegroups
 ON PRIMARY --檔案群組
-  ( NAME='�N�z���~', --//邏輯檔名
-    FILENAME= 'D:\Data\�N�z���~.mdf', -- path
+  ( NAME='dbName', --//邏輯檔名
+    FILENAME= 'D:\Data\dbName.mdf', -- path
     SIZE=8MB,--//init size
     MAXSIZE=10MB,
     FILEGROWTH=1MB ),--//自動成長/大小上限 ： 以1MB為單位， 無限制
 --2. User-defined Filegroups
-FILEGROUP �N�z���~_�s��--//自定義之檔案群組
-  ( NAME = '�N�z���~_�s��_11', --//邏輯檔名
-    FILENAME = 'D:\Data\�N�z���~_�s��_11.ndf',--// path
+FILEGROUP dbName_groups--//自定義之檔案群組
+  ( NAME = 'dbName_groups_11', --//邏輯檔名
+    FILENAME = 'D:\Data\dbName_groups_11.ndf',--// path
     SIZE = 2MB,
     MAXSIZE=10MB,
     FILEGROWTH=1MB ),
-  ( NAME = '�N�z���~_�s��_12',
-    FILENAME = 'D:\Data\�N�z���~_�s��_12.ndf',
+  ( NAME = 'dbName_groups_12',
+    FILENAME = 'D:\Data\dbName_groups_12.ndf',
     SIZE = 2MB,
     MAXSIZE=10MB,
     FILEGROWTH=1MB )
 --交易記錄檔 （不屬於任何filegroup)
 LOG ON
-  ( NAME='�N�z���~_log',
-    FILENAME = 'D:\Data\�N�z���~_log.ldf',
+  ( NAME='dbName_log',
+    FILENAME = 'D:\Data\dbName_log.ldf',
     SIZE=1MB,
     MAXSIZE=10MB,
     FILEGROWTH=10% )
