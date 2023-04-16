@@ -7,7 +7,9 @@ ON PRIMARY
     FILENAME= 'D:\Data\dbName.mdf', -- //mdf : master data file
     SIZE=8MB,
     MAXSIZE=10MB,
-    FILEGROWTH=1MB )
+    FILEGROWTH=10% 
+    ) 
+
 LOG ON
 --//交易記錄檔規格清單
   ( NAME='dbName_log',
@@ -25,5 +27,24 @@ LOG ON
 3.Simple: 完成交易後自動清除
 */
 
+
+DROP DATABASE dbName;
+GO
+CREATE DATABASE dbName
+ON PRIMARY
+(
+    NAME = 'dbName',
+    FILENAME='/Users/eve/Developer/azure/dbName.mdf',
+    SIZE = 8MB,
+    MAXSIZE=10MB,
+    FILEGROWTH=10%
+)
+LOG ON (
+    NAME = 'dbName_log',
+    FILENAME = '/Users/eve/Developer/azure/dbName_log.ldf',
+    SIZE = 1MB,
+    MAXSIZE=10MB,
+    FILEGROWTH = 10%
+)
 
 

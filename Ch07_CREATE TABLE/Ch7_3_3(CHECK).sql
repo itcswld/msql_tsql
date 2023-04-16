@@ -9,6 +9,9 @@ CREATE TABLE tbName (
        CHECK (col3 > 0)
 )
 
+--drop constraint
+alter table <tbName> drop CONSTRAINT <constraint_name>
+
 
 
 
