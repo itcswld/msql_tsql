@@ -2,6 +2,10 @@ USE master
 GO
 CREATE DATABASE dbName
 ON PRIMARY
+/*
+一个后缀名为mdf，是数据文件，另一个后缀名为ldf，为日志文件。
+只要定期复制这两个文件，就可以达到备份
+*/
 --//（主）資料檔規格清單
   ( NAME='dbName',
     FILENAME= 'D:\Data\dbName.mdf', -- //mdf : master data file

@@ -47,7 +47,7 @@ CREATE TABLE PRODUCT(
 [supplier_code] [varchar](20) NOT NULL,
 [recive_due] [int] NULL,
 [expir_due] [int] NULL,
-[p_isdue] bit DEFAULT 0,
+[p_isdue] AS dbo.fnHasDue(expir_due),
 [unit][varchar](4) NOT NULL,
 [p_weight] [float] NULL,
 [is_rtv] [varchar](1) NULL,

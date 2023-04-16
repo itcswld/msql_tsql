@@ -1,4 +1,4 @@
-CREATE FUNCTION fnDueCheck(@expir_due float) RETURNS bit
+CREATE FUNCTION fnHasDue(@expir_due float) RETURNS bit
 BEGIN
     DECLARE @isDue bit = 0
     IF @expir_due > 0
