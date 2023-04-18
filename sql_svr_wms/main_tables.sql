@@ -65,5 +65,6 @@ CREATE TABLE PRODUCT(
 [size_code] [varchar](10) NOT NULL,
 [color_code] [varchar](5) NULL,
 PRIMARY KEY (taskid,owndid, sku, barcode)
+CONSTRAINT uni_prod UNIQUE(owndid, sku, barcode)
 )ON IDB_WMS_FG
 GO
