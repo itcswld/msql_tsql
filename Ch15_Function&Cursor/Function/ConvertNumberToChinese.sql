@@ -1,20 +1,10 @@
-CREATE FUNCTION fnHasDue(@expir_due float) RETURNS bit
-BEGIN
-    DECLARE @isDue bit = 0
-    IF @expir_due > 0
-    BEGIN
-        SET @isDue = 1
-    END
-    RETURN @isDue
-END
-
---chinese unmber
 CREATE FUNCTION ConvertNumberToChinese (@number INT)
-RETURNS NVARCHAR(50)
+RETURNS NVARCHAR(MAX)
+AS 
 BEGIN 
-    DECLARE @chinese VARCHAR(50) = N''
+    DECLARE @chinese NVARCHAR(MAX) = N''
 
-    DECLARE @digits TABLE (digit INT, chinese VARCHAR(10))
+    DECLARE @digits TABLE (digit INT, chinese NVARCHAR(10))
     INSERT INTO @digits (digit, chinese) VALUES (0, N'零')
     INSERT INTO @digits (digit, chinese) VALUES (1, N'壹')
     INSERT INTO @digits (digit, chinese) VALUES (2, N'贰')
@@ -26,7 +16,7 @@ BEGIN
     INSERT INTO @digits (digit, chinese) VALUES (8, N'捌')
     INSERT INTO @digits (digit, chinese) VALUES (9, N'玖')
 
-    DECLARE @digits_unit TABLE (digit_unit INT, chinese_unit VARCHAR(10))
+    DECLARE @digits_unit TABLE (digit_unit INT, chinese_unit NVARCHAR(10))
     INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (0, N'')
     INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (1, N'拾')
     INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (2, N'佰')
@@ -59,4 +49,6 @@ BEGIN
 
     RETURN @chinese
 END
+
+SELECT dbo.ConvertNumberToChinese(12345) -- Output: 壹万贰仟叁佰肆十五
 

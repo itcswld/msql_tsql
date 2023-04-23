@@ -1,3 +1,5 @@
+use master
+go
 CREATE database IDB on PRIMARY(
     NAME = 'IDB',
     FILENAME =  '/Users/eve/Developer/azure/IDB.mdf',
@@ -26,6 +28,7 @@ LOG ON(
     MAXSIZE=100MB,
     FILEGROWTH=10%
 )
+COLLATE Chinese_Taiwan_Stroke_CI_AS
 
 -----WINDOWS
 -- CREATE database IDB on PRIMARY(

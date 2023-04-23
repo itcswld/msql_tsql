@@ -13,3 +13,9 @@ CREATE TABLE tbName (
    salary       money,
    tax      money
 )
+
+
+/*
+varchar vs nvarchar
+nvarchar(n) = varchar(n*2)
+*/
