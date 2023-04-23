@@ -4,3 +4,11 @@ CREATE TABLE #tbName (
    col2      varchar(30) ,
    col3      int
 )
+
+
+with tmpTB AS
+(
+   SELECT col1, ROW_NUMBER() OVER (ORDER BY col1 ASC) AS RowNum from tb1
+)
+SELECT * FROM tmpTB
+WHERE RowNum = 1
