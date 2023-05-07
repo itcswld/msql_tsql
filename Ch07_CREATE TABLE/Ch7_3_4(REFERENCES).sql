@@ -13,3 +13,7 @@ CREATE TABLE tbName (
    FOREIGN KEY (col1) REFERENCES tb3 (col1),
    FOREIGN KEY (col2) REFERENCES tb4(col1)
 )
+
+
+ALTER TABLE [tb1]
+  ADD FOREIGN KEY([col1]) REFERENCES [tb2] ([col2])
