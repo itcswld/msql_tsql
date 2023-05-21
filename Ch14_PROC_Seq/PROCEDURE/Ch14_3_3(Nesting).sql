@@ -1,19 +1,16 @@
 USE edusys
-GO
-CREATE PROCEDURE callProc
-   @proc_name varchar(30) AS
+GO       
 --@@NESTLEVEL 取得目前呼叫的層數
-PRINT '開始層: ' + CAST(@@NESTLEVEL AS char)
-EXEC @proc_name
-PRINT '結束層: ' + CAST(@@NESTLEVEL AS char)
+create proc proc_level @proc_name varchar(30)
+as
+print 'start level: ' + CAST(@@nestlevel as char)
+EXEC @proc_name --level: 2
+print 'end level:' + CAST(@@nestlevel as char)
 GO
 
-CREATE PROCEDURE testProc AS
-PRINT '層數: ' + CAST(@@NESTLEVEL AS char)
+CREATE proc nest_level AS
+PRINT 'level: ' + CAST(@@nestlevel as char)
 GO
-
-EXEC callProc 'testProc'
--- 開始層: 1                             
--- 層數: 2                             
--- 結束層: 1         
-
+--start level: 1                             
+--level: 2                             
+--end level:1  

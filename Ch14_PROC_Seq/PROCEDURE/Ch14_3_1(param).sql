@@ -1,16 +1,16 @@
 USE edusys 
 GO
 --Input Parametrs
-CREATE PROCEDURE proCourse
-   @c_no char(5)
+CREATE PROCEDURE course_of_no
+   @no char(5)
 AS
 BEGIN
   SELECT no, title, credits
   FROM course
-  WHERE no = @c_no
+  WHERE no = @no
 END
 GO
 
-EXEC proCourse @c_no = 'CS101'
+EXEC course_of_no @no = 'CS101'
 
-EXEC proCourse 'CS101'
+EXEC course_of_no 'CS101'

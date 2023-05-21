@@ -1,22 +1,15 @@
-USE edusys 
-GO
-CREATE PROCEDURE procEmployee
-   @salary money,
-   @tax    money
+create proc emp_income @salary money, @tax money
 AS
 BEGIN
-  IF @salary <= 0
-     SET @salary = 30000
-  IF @tax <= 0
-     SET @tax = 300
-  SELECT id, name, 
-      (salary - tax) AS 所得
-  FROM employee
-  WHERE salary >= @salary
-    AND tax >= @tax
+    if @salary <= 0
+        set @salary = 30000
+    if @tax <= 0
+        set @tax = 300
+    
+    select id, name, (salary - tax) as income
+    from employee
+    where salary >= @salary and tax >= @tax
 END
 GO
 
-EXEC procEmployee 50000, 500
-
-
+exec emp_income 50000, 500

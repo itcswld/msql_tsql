@@ -1,9 +1,6 @@
 USE edusys 
 GO
-DECLARE @proc_name char(20)
-SET @proc_name = 'proClass_report'
-EXEC @proc_name
-
-
+DECLARE @proc char(20) = 'course_report'
+EXEC @proc
 
 

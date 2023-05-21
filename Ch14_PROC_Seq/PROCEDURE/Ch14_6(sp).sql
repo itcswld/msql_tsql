@@ -3,7 +3,7 @@ GO
 --System stored Procedures
 
 -- sp_helptext: stored Procedures code
-EXEC sp_helptext proCourse
+EXEC sp_helptext student_query
 GO
 --sp_columns 資料表名稱： 傳回指定資料表或檢視表的欄位資訊
 EXEC sp_columns student

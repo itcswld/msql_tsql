@@ -15,6 +15,8 @@ T-sQL 指令叙述至 SQL Server•就可以在SQL Server 資料庫引擎執行T
 提供安全性：預存程序是 SQL Server 資料庫物件，我們可以透過授與預存程序權限來存取使用者沒有擁有權限的物件。而且，擁有參數的預存
 程序還可以增加用戶端程式的安全性，降低駭客攻擊 SQL Server 伺服器的機會。
 */
+use edusys
+go
 CREATE PROCEDURE student_query AS -- 或 CREATE PROC
 --[WITH {RECOMPLIE | ENCRYPTION | RECOMPILE, ENCRYPTION}]
 /*

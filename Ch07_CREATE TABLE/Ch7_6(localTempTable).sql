@@ -6,6 +6,15 @@ CREATE TABLE #tbName (
 )
 
 
+create table #stud (
+    no char(4),
+    name nvarchar(12)
+)
+insert #stud
+select no, name from student
+WHERE sex = '男'
+select * from #stud
+
 with tmpTB AS
 (
    SELECT col1, ROW_NUMBER() OVER (ORDER BY col1 ASC) AS RowNum from tb1

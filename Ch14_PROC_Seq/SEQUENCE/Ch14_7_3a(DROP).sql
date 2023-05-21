@@ -1,4 +1,4 @@
-USE 教務系統 
+USE edusys 
 GO
-DROP SEQUENCE 編號順序
+DROP SEQUENCE seqName
 GO

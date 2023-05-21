@@ -1,17 +1,13 @@
-USE edusys 
-GO
-CREATE PROCEDURE proCourse_report AS 
+use edusys
+go
+CREATE PROCEDURE course_report AS
 BEGIN
---inner join 4 tables
-  SELECT student.no, student.name, course.*, proffessor.*
-  FROM proffessor INNER JOIN
-  (course INNER JOIN 
-  (student INNER JOIN class ON student.no = class.stud_no) 
-  ON class.course_no = course.no )
-  ON class.prof_no = proffessor.no
+    SELECT c.no, c.name, b.* ,a.*
+    from proffessor a inner JOIN(
+        course b inner join(
+               student c inner join class d on c.no = d.stud_no
+        )on b.[no] = d.course_no
+    )on a.[no] = d.prof_no
 END
 GO
-
-EXEC proCourse_report
-
-
+EXEC course_report

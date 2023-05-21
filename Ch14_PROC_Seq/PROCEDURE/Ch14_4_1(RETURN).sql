@@ -1,27 +1,26 @@
-USE edusys 
-GO
-CREATE PROCEDURE addCourse
-   @c_no char(5),
-   @title  varchar(30),
-   @credits int
-AS
+create proc add_course 
+    @no char(5),
+    @title varchar(30),
+    @credits int
+as 
 BEGIN
-  DECLARE @errorNo int
-  INSERT INTO course
-  VALUES (@c_no, @title, @credits)
-  --@@ERROR 錯誤碼
-  SET @errorNo = @@ERROR
-  IF @errorNo <> 0
-  BEGIN
-    IF @errorNo = 2627
-       PRINT 'Error! 重複索引鍵'
-    ELSE
-       PRINT 'Error! unknow error!'
-    RETURN @errorNO
-  END
+    DECLARE @err_no int
+
+    insert into course values(@no, @title, @credits)
+
+    set @err_no = @@ERROR
+    if @err_no != 0
+    BEGIN
+        if @err_no = 2627
+            print 'Cannot insert duplicate key!'
+        else 
+             print error_message()
+    END
+
+    RETURN @err_no
 END
 GO
 
-DECLARE @retVar int
-EXEC @retVar = addCourse 'CS222','資料庫程式設計',3
-PRINT '回傳代碼:' + CONVERT(varchar, @retVar)
+DECLARE @result int
+EXEC @result = add_course 'CS222','資料庫程式設計',3
+print 'return code: ' + CONVERT(varchar, @result)

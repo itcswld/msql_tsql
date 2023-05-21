@@ -8,34 +8,31 @@ SET IDENTITY_INSERT 資料表名稱 ON | OFF
 USE edusys 
 GO
 --建立【好客戶】和【好員工】兩個資料表
-CREATE TABLE GoodCus (
+CREATE TABLE cus (
    no int IDENTITY PRIMARY KEY,
    id varchar(12) NOT NULL,
    name char(12)
 )
-CREATE TABLE GoodEmp (
+CREATE TABLE emp (
    no int IDENTITY PRIMARY KEY,
    name varchar(12) NOT NULL
 )
 GO
 --使用順序物件產生的數值來插入這2個資料表的識別欄位。
-SET IDENTITY_INSERT GoodCus ON
+SET IDENTITY_INSERT cus ON
 GO
-INSERT INTO GoodCus(no, id, name)--have to make a column list 
-VALUES (NEXT VALUE FOR seqName, 'A333333333' , 'Joe') --在【GoodCus】資料表插入一筆記錄
+INSERT INTO cus(no, id, name)--have to make a column list 
+VALUES (NEXT VALUE FOR seqName, 'A333333333' , 'Joe') --在【cus】資料表插入一筆記錄
 GO
-SET IDENTITY_INSERT GoodCus OFF
+SET IDENTITY_INSERT cus OFF
 GO
-SET IDENTITY_INSERT GoodEmp ON
+SET IDENTITY_INSERT emp ON
 GO
-INSERT INTO GoodEmp(no, name) 
-VALUES (NEXT VALUE FOR seqName, 'Eve')
+INSERT INTO emp(no, name) 
+VALUES (NEXT VALUE FOR seqName, 'Eve'),(NEXT VALUE FOR seqName, 'Chi')--【GoodEmp】資料表插人 2筆記錄。
 GO
-INSERT INTO GoodEmp(no, name)
-VALUES (NEXT VALUE FOR seqName, 'Chi')--【GoodEmp】資料表插人 2筆記錄。
+SET IDENTITY_INSERT emp OFF
 GO
-SET IDENTITY_INSERT GoodEmp OFF
+SELECT * FROM cus
 GO
-SELECT * FROM GoodCus
-GO
-SELECT * FROM GoodEmp
+SELECT * FROM emp

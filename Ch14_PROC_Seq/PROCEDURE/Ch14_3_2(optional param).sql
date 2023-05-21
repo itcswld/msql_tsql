@@ -1,22 +1,20 @@
 USE �аȨt�� 
 GO
 --Optional Parameters
-CREATE PROCEDURE searchAddr
-   @city char(5) = '台北', -- Default
-   @street varchar(30) = '中正路'
+create PROC search_addr @city CHAR(5) = '台北', @str varchar(30) = '中正路'
 AS
 BEGIN
-  SELECT id, name, 
-      (salary - tax) AS 所得, 
-      (city+str) AS 地址
-  FROM employee
-  WHERE city LIKE @city
-    AND str LIKE @street
-END
-GO
+    SELECT id,name, (salary - tax) as income, (city + str) as addr
+    from employee
+    WHERE city like @city and str like @str
+end
+go
 
-EXEC searchAddr @city = '桃園'
-GO
+EXEC search_addr @city = '桃園'
+go
+EXEC search_addr '桃園', default
+go
+EXEC search_addr '桃園'
 
-EXEC searchAddr '桃園' ,DEFAULT
+
 
