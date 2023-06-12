@@ -1,14 +1,12 @@
 USE edusys 
 GO
-CREATE VIEW studentEmployee_view AS
-SELECT student.no, student.name,student.sex, 
-       student.phone, student.bday, 
-       employee.id, employee.city, employee.str, employee.salary, employee.insurance, employee.tax
-FROM student INNER JOIN employee
-ON student.name = employee.name
+create VIEW stud_emp_view AS
+SELECT s.no, s.name, s.sex, s.phone, s.bd, e.id, e.city , e.str , e.salary, e.ins, e.tax
+from student s inner join employee e
+on s.name = e.name
 GO
 
-SELECT * FROM studentEmployee_view
+select * from stud_emp_view
 
 
 CREATE TRIGGER addNew_studentEmployee
@@ -21,11 +19,11 @@ IF @rowCount = 1
   BEGIN
   --同時新增兩筆
     INSERT student
-    SELECT no, name, sex, phone, bday
+    SELECT no, name, sex, phone, bd
     FROM Inserted
 
     INSERT employee
-    SELECT id, name, city, str, phone, salary, insurance, tax
+    SELECT id, name, city, str, phone, salary, ins, tax
     FROM Inserted
     PRINT 'updated 2 rows'
   END

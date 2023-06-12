@@ -1,4 +1,4 @@
-USE �аȨt�� 
+USE edusys 
 GO
 CREATE FUNCTION fnPrice
   (@today datetime)
@@ -22,4 +22,3 @@ CREATE TABLE product (
    name   varchar(20),
    price  money DEFAULT (dbo.fnPrice(GETDATE()))
 )
-

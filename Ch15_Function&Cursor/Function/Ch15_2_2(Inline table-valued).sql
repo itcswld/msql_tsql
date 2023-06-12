@@ -1,4 +1,4 @@
-USE �аȨt�� 
+USE edusys 
 GO
 CREATE FUNCTION fnProfessor
     (@salary money)

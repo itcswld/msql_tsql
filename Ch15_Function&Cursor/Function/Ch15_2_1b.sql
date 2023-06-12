@@ -1,4 +1,4 @@
-USE �аȨt��
+USE edusys
 GO
 CREATE FUNCTION fnFactorial
     (@number int)
@@ -14,4 +14,11 @@ BEGIN
   RETURN @level
 END
 GO
-PRINT '5!���� = ' + CONVERT(varchar, dbo.fnFactorial(5))
+PRINT '5!'''s value'= ' + CONVERT(varchar, dbo.fnFactorial(5))
+
+/*
+fnFactorial(2) = 2
+fnFactorial(3) = 3 *fnFactorial(2) = 3 * 2 = 6
+fnFactorial(4) = 4 * fnFactorial(3) = 4 * 6 = 24
+fnFactorial(5) = 4 * fnFactorial(4) = 5 * 24 = 120
+*/

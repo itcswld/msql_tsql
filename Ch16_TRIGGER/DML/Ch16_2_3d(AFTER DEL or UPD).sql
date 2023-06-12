@@ -13,9 +13,7 @@ BEGIN
 END
 GO
 
-DELETE employee
-WHERE id = 'F332213046'
+DELETE employee WHERE id = 'F332213046'
 GO
-UPDATE employee
-SET salary = 55000
+UPDATE employee SET salary = 55000
 WHERE id = 'F332213046'

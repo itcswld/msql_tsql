@@ -1,4 +1,4 @@
-USE �аȨt��
+USE edusys
 GO
 CREATE TRIGGER checkCredits
 ON course

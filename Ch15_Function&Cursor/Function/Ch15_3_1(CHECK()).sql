@@ -1,11 +1,9 @@
-USE �аȨt�� 
+USE edusys
 GO
-CREATE FUNCTION fnValidCode
-  (@p_no char(5))
-  RETURNS bit
+CREATE FUNCTION fnValidCode(@p_no char(5)) RETURNS bit
 BEGIN
-  DECLARE @valid bit, @number int
-  SET @valid = 0
+  DECLARE @valid bit = 0, @number int
+
   IF @p_no LIKE '[A-Z][0-9][0-9][0-9][0-9]'
   BEGIN
     SET @number = CONVERT(int, RIGHT(@p_no, 2))

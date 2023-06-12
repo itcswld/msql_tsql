@@ -5,7 +5,7 @@
 預存程序可以新增、更新或刪除資料表的記錄資料，也可以更改資料庫相關的選項設定；自訂函數主要是使用在運算和取出資料，所以並不允許更改資料表內容和資料庫的選項設定。
 */
 
-USE �аȨt�� 
+USE edusys
 GO
 --fn開頭
 --Scalar-valued Function 回傳類型
@@ -26,5 +26,6 @@ BEGIN
 END
 
 
-
+PRINT dbo.fnGetSalary('陳慶新')
+PRINT 'salary: ' + CONVERT(varchar, dbo.fnGetSalary('Eve'))
 

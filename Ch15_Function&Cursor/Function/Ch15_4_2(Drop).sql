@@ -1,3 +1,3 @@
-USE 教務系統 
+USE edusys
 GO
 DROP FUNCTION fnProfessor
