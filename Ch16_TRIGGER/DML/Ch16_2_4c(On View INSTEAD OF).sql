@@ -10,7 +10,7 @@ select * from stud_emp_view
 
 
 CREATE TRIGGER addNew_studentEmployee
-ON studentEmployee_view 
+ON stud_emp_view 
 INSTEAD OF INSERT
 AS 
 DECLARE @rowCount int
@@ -32,7 +32,7 @@ ELSE
 GO
 
 
-INSERT INTO studentEmployee_view 
+INSERT INTO stud_emp_view 
 VALUES ('S500', 'Eve', '男','05-55522222',
         '1995/12/25','F123450789','台北',
         '仁愛路', 50000, 2000, 900)

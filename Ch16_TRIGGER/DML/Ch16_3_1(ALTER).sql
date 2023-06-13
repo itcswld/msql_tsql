@@ -24,7 +24,7 @@ IF @count > 0
 BEGIN
   PRINT 'updated [' + CONVERT(varchar, @count) +
         '] columns!'
-  ROLLBACK TRAN
+  ROLLBACK TRAN -- 如果由更新就回復資料
 END
 GO
 

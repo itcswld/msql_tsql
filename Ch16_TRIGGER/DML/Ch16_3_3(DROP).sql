@@ -1,6 +1,6 @@
 USE edusys 
 GO
-DROP TRIGGER updCheck的
+DROP TRIGGER updCheck
 
 
 

@@ -4,7 +4,7 @@ CREATE TRIGGER updCheck
 ON proffessor 
 AFTER UPDATE
 AS 
-DECLARE @count int
+DECLARE @count int = 0
 SET @count = 0
 IF UPDATE(title) --UPDATE(col_name)
 BEGIN
