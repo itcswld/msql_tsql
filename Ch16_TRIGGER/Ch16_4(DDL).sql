@@ -26,8 +26,12 @@ BEGIN
 END
 GO
 
-GO
+
 DROP TABLE student
+
+
+DROP TRIGGER readonlyTB
+ON DATABASE
 
 
 
