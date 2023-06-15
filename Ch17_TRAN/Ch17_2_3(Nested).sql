@@ -13,17 +13,18 @@ COMMIT TRAN 和 ROLLBACK TRAN 指令在巢狀交易中的作用，會因
 
 USE edusys 
 GO
+--outer tran
 BEGIN TRAN
-PRINT 'Outer Transaction = ' + 
-      CONVERT(varchar, @@TRANCOUNT) -- = 1
+PRINT 'Outer Transaction = ' + CONVERT(varchar, @@TRANCOUNT) -- = 1
 DELETE classDup
+--inner tran
   BEGIN TRAN
-  PRINT 'Inner Transaction = ' + 
-  CONVERT(varchar, @@TRANCOUNT) -- = 1-1
+  PRINT 'Inner Transaction = ' + CONVERT(varchar, @@TRANCOUNT) -- = 1+1 =2
   DELETE studDup
-  COMMIT TRAN
-  PRINT 'Commited Transaction = ' + 
-  CONVERT(varchar, @@TRANCOUNT) 
+  COMMIT TRAN --只有當@@TRANCOUNT= 1時，執行COMMIT TRAN 才會真的認可交易
+  PRINT 'Commited Transaction = ' + CONVERT(varchar, @@TRANCOUNT) -- 1
+
+--不論在哪一層執行 ROLLBACK TRAN 都是回復整個巢狀交易，@@TRANCOUNT 也會歸 0。
 ROLLBACK TRAN
 PRINT 'Rolled Back Transaction = ' + 
        CONVERT(varchar, @@TRANCOUNT) -- = 0

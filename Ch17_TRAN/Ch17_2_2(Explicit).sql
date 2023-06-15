@@ -19,16 +19,17 @@ SET IMPLICIT_TRANSACTIONS ON 進人隱含交易模式，表示交易開始執行
 
 USE edusys 
 GO
+--duplicatae a table
 SELECT * INTO classDup
 FROM class_no
-
 GO
 SELECT * INTO studDup
 FROM stud_no
 GO
+
 BEGIN TRAN
 DELETE classDup 
-WHERE class_no = 'S001'
+WHERE stud_no = 'S001'
 IF @@ROWCOUNT > 5
   BEGIN
     ROLLBACK TRAN

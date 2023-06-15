@@ -19,3 +19,8 @@ CREATE TABLE tbName (
 varchar vs nvarchar
 nvarchar(n) = varchar(n*2)
 */
+
+
+--Duplicate a table
+select * into tb_copy from tbName
+
