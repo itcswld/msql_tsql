@@ -1,21 +1,43 @@
 USE edusys 
 GO
+-- rollback 指定交易點
+
 BEGIN TRAN
-  DECLARE @count int
-  DELETE classDup WHERE stud_no = 'S001'
-  SAVE TRAN savePoint1
-    DELETE studDup WHERE stud_no = 'S002'
-    SAVE TRAN savePoint2
-      DELETE studDup WHERE stud_no = 'S003'
-      SELECT @count = COUNT(*) FROM studDup
-      PRINT 'Records: ' + CONVERT(varchar, @count)
-    ROLLBACK TRAN savePoint2
-    SELECT @count = COUNT(*) FROM studDup
-    PRINT 'Records: ' + CONVERT(varchar, @count)
-  ROLLBACK TRAN savePoint1
-  SELECT @count = COUNT(*) FROM studDup
-  PRINT 'Records: ' + CONVERT(varchar, @count)
+
+DECLARE @ct INT
+
+SELECT @ct = COUNT(*) FROM classDup 
+PRINT 'classDup rows: ' + CONVERT(VARCHAR, @ct) --12
+DELETE classDup WHERE stud_no = 'S002'
+SELECT @ct = COUNT(*) FROM classDup 
+PRINT 'classDup rows: ' + CONVERT(VARCHAR, @ct) --9
+
+SELECT @ct = COUNT(*) FROM studDup
+PRINT 'studDup rows: ' + CONVERT(VARCHAR, @ct) --8
+
+SAVE TRAN sp1 --儲存交易點
+DELETE studDup WHERE [no] = 'S002'
+SELECT @ct = COUNT(*) FROM studDup 
+PRINT 'studDup rows: ' + CONVERT(VARCHAR, @ct)  --7
+
+SAVE TRAN sp2
+DELETE studDup WHERE [no] = 'S003'
+SELECT @ct = COUNT(*) FROM studDup
+PRINT 'studDup rows: ' + CONVERT(VARCHAR, @ct) -- 6
+
+ROLLBACK TRAN sp1
+SELECT @ct = COUNT(*) FROM studDup
+PRINT 'studDup rows: ' + CONVERT(VARCHAR, @ct) -- 7
+
+ROLLBACK TRAN sp2 -- rollback 指定儲存交易點
+SELECT @ct = COUNT(*) FROM studDup
+PRINT 'studDup rows: ' + CONVERT(VARCHAR, @ct) -- 8
+
+
 COMMIT TRAN
+
+
+
 
 
 
