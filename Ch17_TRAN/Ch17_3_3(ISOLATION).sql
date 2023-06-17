@@ -29,8 +29,8 @@ WHERE id = 'Y123456789'
 IF @@ERROR = 0
   BEGIN
     UPDATE proffessor 
-    SET title = 'AssocProf'
-    WHERE no = 'I014'
+      SET title = 'AssocProf'
+      WHERE no = 'I014'
     IF @@ERROR = 0
        COMMIT TRAN
     ELSE
@@ -39,8 +39,10 @@ IF @@ERROR = 0
 ELSE
   ROLLBACK TRAN
 
+GO
 
-
+SELECT salary, ins from employee WHERE id = 'Y123456789'
+SELECT job from proffessor  WHERE no ='I014'
 
 
 
