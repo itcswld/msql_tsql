@@ -21,15 +21,16 @@ USE edusys
 GO
 --duplicatae a table
 SELECT * INTO classDup
-FROM class_no
+FROM class
 GO
 SELECT * INTO studDup
-FROM stud_no
+FROM stud
 GO
 
+DECLARE @sn VARCHAR(4) = 'S001'
 BEGIN TRAN
 DELETE classDup 
-WHERE stud_no = 'S001'
+WHERE stud_no = @sn
 IF @@ROWCOUNT > 5
   BEGIN
     ROLLBACK TRAN
@@ -38,7 +39,7 @@ IF @@ROWCOUNT > 5
 ELSE
   BEGIN
     DELETE studDup
-    WHERE stud_no = 'S001'
+    WHERE no = @sn
     COMMIT TRAN
     PRINT '認可刪除!'
   END
