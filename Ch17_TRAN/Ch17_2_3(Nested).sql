@@ -11,23 +11,31 @@ COMMIT TRAN 和 ROLLBACK TRAN 指令在巢狀交易中的作用，會因
 。ROLLBACK TRAN：不論在哪一層執行 ROLLBACK TRAN 都是回復整個巢狀交易，@@TRANCOUNT 也會歸 0。
 */
 
-USE edusys 
-GO
+DECLARE @cr int, @sr int
 --outer tran
 BEGIN TRAN
-PRINT 'Outer Transaction = ' + CONVERT(varchar, @@TRANCOUNT) -- = 1
+PRINT 'outer tran: ' + CONVERT(varchar, @@trancount) -- 1
 DELETE classDup
+select  @cr = COUNT(*) FROM classDup
+print 'classDup rows: ' + CONVERT(VARCHAR,@cr) -- 0
 --inner tran
-  BEGIN TRAN
-  PRINT 'Inner Transaction = ' + CONVERT(varchar, @@TRANCOUNT) -- = 1+1 =2
-  DELETE studDup
-  COMMIT TRAN --只有當@@TRANCOUNT= 1時，執行COMMIT TRAN 才會真的認可交易
-  PRINT 'Commited Transaction = ' + CONVERT(varchar, @@TRANCOUNT) -- 1
+    BEGIN TRAN
+    PRINT 'innert tran: ' + CONVERT(varchar, @@trancount) --2
+    DELETE studDup
+    SELECT @sr = COUNT(*) FROM studDup
+    print 'studDup rows: ' + CONVERT(VARCHAR, @sr) -- 0
 
---不論在哪一層執行 ROLLBACK TRAN 都是回復整個巢狀交易，@@TRANCOUNT 也會歸 0。
-ROLLBACK TRAN
-PRINT 'Rolled Back Transaction = ' + 
-       CONVERT(varchar, @@TRANCOUNT) -- = 0
+    COMMIT TRAN --只有當@@TRANCOUNT= 1時，執行COMMIT TRAN 才會真的認可交易
+    PRINT 'commited tran : ' + CONVERT(varchar, @@trancount) -- 1
+    SELECT @cr = COUNT(*) FROM classDup
+    SELECT @sr = COUNT(*) FROM studDup
+    print 'classDup/studDup rows: ' + CONVERT(VARCHAR, @cr) + '/' + CONVERT(VARCHAR, @sr) -- 0/0
+
+ROLLBACK TRAN--不論在哪一層執行 ROLLBACK TRAN 都是回復整個巢狀交易，@@TRANCOUNT 也會歸 0。
+PRINT 'rolloback tran: ' + CONVERT(varchar, @@trancount) -- 0
+    SELECT @cr = COUNT(*) FROM classDup
+    SELECT @sr = COUNT(*) FROM studDup
+    print 'classDup/studDup rows:' + CONVERT(VARCHAR, @cr) + '/' + CONVERT(VARCHAR, @sr) -- 21/9
 
 
 
