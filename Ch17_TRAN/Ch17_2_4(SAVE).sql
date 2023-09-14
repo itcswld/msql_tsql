@@ -6,7 +6,7 @@ BEGIN TRAN
 DECLARE @ct INT
 SELECT @ct = COUNT(*) FROM studDup 
 PRINT 'rows: ' + CONVERT(VARCHAR, @ct) --9
-SAVE TRAN sp1 --儲存交易點/交易儲存點
+SAVE TRAN sp1 --儲存交易點/交易儲存點 (save points)
     DELETE studDup WHERE no = 'S001'
     SELECT @ct = COUNT(*) FROM studDup 
     PRINT 'rows: ' + CONVERT(VARCHAR, @ct) --8

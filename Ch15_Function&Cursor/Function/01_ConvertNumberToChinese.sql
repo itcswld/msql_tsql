@@ -7,11 +7,11 @@ BEGIN
     DECLARE @digits TABLE (digit INT, chinese NVARCHAR(10))
     INSERT INTO @digits (digit, chinese) VALUES (0, N'零')
     INSERT INTO @digits (digit, chinese) VALUES (1, N'壹')
-    INSERT INTO @digits (digit, chinese) VALUES (2, N'贰')
-    INSERT INTO @digits (digit, chinese) VALUES (3, N'叁')
+    INSERT INTO @digits (digit, chinese) VALUES (2, N'貳')
+    INSERT INTO @digits (digit, chinese) VALUES (3, N'參')
     INSERT INTO @digits (digit, chinese) VALUES (4, N'肆')
     INSERT INTO @digits (digit, chinese) VALUES (5, N'伍')
-    INSERT INTO @digits (digit, chinese) VALUES (6, N'陆')
+    INSERT INTO @digits (digit, chinese) VALUES (6, N'陸')
     INSERT INTO @digits (digit, chinese) VALUES (7, N'柒')
     INSERT INTO @digits (digit, chinese) VALUES (8, N'捌')
     INSERT INTO @digits (digit, chinese) VALUES (9, N'玖')
@@ -21,8 +21,8 @@ BEGIN
     INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (1, N'拾')
     INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (2, N'佰')
     INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (3, N'仟')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (4, N'万')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (8, N'亿')
+    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (4, N'萬')
+    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (8, N'億')
 
     IF @number = 0
         SET @chinese = N'零'
@@ -34,7 +34,7 @@ BEGIN
 
         WHILE @number > 0 
         BEGIN
-            SET @unit = @pos % 4
+            SET @unit = @pos % 5
             SET @digit = @number % 10
 
             IF @unit = 0 AND @digit = 0

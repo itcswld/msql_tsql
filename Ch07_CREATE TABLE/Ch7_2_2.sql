@@ -10,10 +10,8 @@ CREATE TABLE tbName (
    str       varchar(30),
    phone       char(12),
    salary       money,
-   salary       money,
    tax      money
 )
-
 
 /*
 varchar vs nvarchar
