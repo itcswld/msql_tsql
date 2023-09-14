@@ -1,4 +1,4 @@
-CREATE FUNCTION ConvertNumberToChinese (@number INT)
+CREATE FUNCTION NumberToChinese (@number INT)
 RETURNS NVARCHAR(MAX)
 AS 
 BEGIN 
@@ -50,5 +50,5 @@ BEGIN
     RETURN @chinese
 END
 
-SELECT dbo.ConvertNumberToChinese(12345) -- Output: 壹万贰仟叁佰肆十五
+SELECT dbo.NumberToChinese(12345) -- Output: 壹万贰仟叁佰肆十五
 
