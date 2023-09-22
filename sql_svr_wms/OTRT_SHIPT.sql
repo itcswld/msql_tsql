@@ -20,7 +20,7 @@ BEGIN
     ,[OWNDID]
     ,[ERP_NO]
     ,[SEQ]
-    ,O_NAME [PERSON]
+    ,TO_STORE [PERSON]
     ,NULL [TAXID]
     ,[SKU]
     ,[QTY]
