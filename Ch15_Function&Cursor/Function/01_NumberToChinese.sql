@@ -1,54 +1,32 @@
-CREATE FUNCTION NumberToChinese (@number INT)
-RETURNS NVARCHAR(MAX)
-AS 
-BEGIN 
-    DECLARE @chinese NVARCHAR(MAX) = N''
-
-    DECLARE @digits TABLE (digit INT, chinese NVARCHAR(10))
-    INSERT INTO @digits (digit, chinese) VALUES (0, N'零')
-    INSERT INTO @digits (digit, chinese) VALUES (1, N'壹')
-    INSERT INTO @digits (digit, chinese) VALUES (2, N'貳')
-    INSERT INTO @digits (digit, chinese) VALUES (3, N'參')
-    INSERT INTO @digits (digit, chinese) VALUES (4, N'肆')
-    INSERT INTO @digits (digit, chinese) VALUES (5, N'伍')
-    INSERT INTO @digits (digit, chinese) VALUES (6, N'陸')
-    INSERT INTO @digits (digit, chinese) VALUES (7, N'柒')
-    INSERT INTO @digits (digit, chinese) VALUES (8, N'捌')
-    INSERT INTO @digits (digit, chinese) VALUES (9, N'玖')
-
-    DECLARE @digits_unit TABLE (digit_unit INT, chinese_unit NVARCHAR(10))
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (0, N'')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (1, N'拾')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (2, N'佰')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (3, N'仟')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (4, N'萬')
-    INSERT INTO @digits_unit (digit_unit, chinese_unit) VALUES (8, N'億')
-
-    IF @number = 0
-        SET @chinese = N'零'
-    ELSE 
-    BEGIN
-        DECLARE @pos INT = 0
-        DECLARE @unit INT
-        DECLARE @digit INT
-
-        WHILE @number > 0 
-        BEGIN
-            SET @unit = @pos % 5
-            SET @digit = @number % 10
-
-            IF @unit = 0 AND @digit = 0
-                SET @chinese = (SELECT chinese_unit FROM @digits_unit WHERE digit_unit = @pos) + @chinese
-            ELSE
-                SET @chinese = (SELECT chinese FROM @digits WHERE digit = @digit) + (SELECT chinese_unit FROM @digits_unit WHERE digit_unit = @unit) + @chinese
-
-            SET @number = @number / 10
-            SET @pos = @pos + 1
-        END
-    END
-
-    RETURN @chinese
+ALTER  Function [dbo].[fnTotalChinese](@money int)
+returns nvarchar(40)
+as
+BEGIN
+   declare @money_num nvarchar(20)    --存儲金額的字符形式
+         , @money_chn nvarchar(32)    --存儲金額的中文大寫形式
+         , @n_chn nvarchar(1), @i int    --臨時變量
+ 
+     select @money_chn=case when @money>=0 then '' else null end
+         , @money=abs(@money)
+         , @money_num=stuff(str(@money, 15, 2), 13, 1, '')    --加前置空格補齊到位（去掉小數點）
+         , @i=patindex('%[1-9]%', @money_num)    --找到金額最高位
+ 
+     while @i>=1 and @i<=14
+     begin
+         set @n_chn=substring(@money_num, @i, 1)  
+         if @n_chn<>'0' or (substring(@money_num,@i+1,1)<>'0' and @i not in(4, 8, 12, 14))    --轉換阿拉伯數字為中文大寫形式  
+             set @money_chn=@money_chn+substring(N'零壹貳參肆伍陸柒捌玖', @n_chn+1, 1)
+         if @n_chn<>'0' or @i in(4, 8, 12)    --添加中文單位
+             set @money_chn=@money_chn+substring(N'仟佰拾億仟佰拾萬仟佰拾 角分',@i,1)    
+   
+         set @i=@i+1
+     end
+ 
+     set @money_chn=replace(@money_chn, N'億萬', N'億')    --當金額為x億零萬時去掉萬
+     if @money=0 set @money_chn='零元整'    --當金額為零時返回'零圓整'
+     if @n_chn='0' set @money_chn=@money_chn+N'元整'    --當金額末尾為零分時以'整'結尾
+ 
+  
+     RETURN rtrim(@money_chn)
 END
-
-SELECT dbo.NumberToChinese(12345) -- Output: 壹万贰仟叁佰肆十五
 
