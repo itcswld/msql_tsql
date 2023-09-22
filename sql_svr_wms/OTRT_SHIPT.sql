@@ -28,14 +28,14 @@ BEGIN
     ,NULL [INVOICE]
     ,[UPRICE] --建議售價
     ,[DISCOUNT]
-    ,P_PRICE [PRICE] -- 單價
-    ,FLOOR(ROUND(P_PRICE * QTY,0)) [TOTAL] --品項總金額
+    ,P_PRICE [PRICE] --單價 = [UPRICE] * [DISCOUNT]
+    ,FLOOR(ROUND(P_PRICE * QTY,0)) [TOTAL] --小計 = 品項總金額
     
     ,0 [TAXHANDLE] --稅類別
     ,NULL [AMOUNT]
-    ,FLOOR(ROUND(@TTL * 1.05, 0)) [SUM] --總計（含稅）
-    ,@TTL [UNTAXED] -- 銷售額合計
-    ,FLOOR(ROUND(@TTL * 0.05, 0)) [TAX]
+    ,FLOOR(ROUND(@TTL * 1.05, 0)) [SUM] --合計 = 總計（含稅）
+    ,@TTL [UNTAXED] --銷售額合計
+    ,FLOOR(ROUND(@TTL * 0.05, 0)) [TAX] --營業稅額
     ,dbo.[fnTotalChinese] [UPPERPRICE] --中文大寫
     FROM OT WHERE [ERP_NO] = @NO
   END
