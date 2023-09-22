@@ -1,4 +1,5 @@
-ALTER  Function [dbo].[fnTotalChinese](@money int)
+/* Author: Eve | Date: 09/23/2023 */
+ALTER  Function [dbo].[fnMoneyCN](@money int)
 returns nvarchar(40)
 
 BEGIN
