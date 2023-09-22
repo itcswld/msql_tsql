@@ -12,7 +12,7 @@ BEGIN
     ((SELECT COUNT(*) FROM OTR WHERE [ERP_NO] = @NO) >
         (SELECT COUNT(*) FROM OT WHERE [ERP_NO] = @NO))
   BEGIN
-    SET @TTL = SELECT FLOOR(ROUND(SUM([P_PRICE] * [QTY]),0)) FROM OTR WHERE [ERP_NO] = @NO
+    SET @TTL = SELECT FLOOR(ROUND(SUM([P_PRICE] * [QTY]), 0)) FROM OTR WHERE [ERP_NO] = @NO
 
     INSERT INTO OTRT
     SELECT
@@ -33,7 +33,7 @@ BEGIN
     
     ,0 [TAXHANDLE] --稅類別
     ,NULL [AMOUNT]
-    ,@TTL * 1.05 [SUM] --總計（含稅）
+    ,FLOOR(ROUND(@TTL * 1.05, 0)) [SUM] --總計（含稅）
     ,@TTL [UNTAXED] -- 銷售額合計
     ,FLOOR(ROUND(@TTL * 0.05, 0)) [TAX]
     ,dbo.[fnTotalChinese] [UPPERPRICE] --中文大寫
