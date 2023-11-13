@@ -1,3 +1,4 @@
+--Update from One Table to Another Based on a ID Match
 UPDATE a
 SET 
 a.col1=b.co1
